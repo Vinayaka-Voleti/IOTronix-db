@@ -8,20 +8,30 @@ import Image from "next/image"
 import { teams } from "@/data/teams";
 
 export default function LeaderboardPage() {
+  const [teams, setTeams] = useState([])
   const [currentTeamIndex, setCurrentTeamIndex] = useState(0)
   const [direction, setDirection] = useState(1)
 
   useEffect(() => {
+    fetch("http://127.0.0.1:8000/get-teams/")
+      .then((res) => res.json())
+      .then((data) => setTeams(data.teams || []))
+  }, [])
+
+  useEffect(() => {
     const handleKeyPress = (e: KeyboardEvent) => {
-      if (e.key === "Enter") {
+      if (e.key === "Enter" || e.key === "ArrowRight") {
         setDirection(1)
         setCurrentTeamIndex((prev) => (prev + 1) % teams.length)
+      } else if (e.key === "ArrowLeft") {
+        setDirection(-1)
+        setCurrentTeamIndex((prev) => (prev - 1 + teams.length) % teams.length)
       }
     }
 
     window.addEventListener("keydown", handleKeyPress)
     return () => window.removeEventListener("keydown", handleKeyPress)
-  }, [])
+  }, [teams])
 
   const currentTeam = teams[currentTeamIndex]
 
@@ -70,15 +80,17 @@ export default function LeaderboardPage() {
 
       <main className="relative w-full h-full flex items-center justify-center mt-16">
         <AnimatePresence mode="wait">
-          <motion.div
-            key={currentTeam.id}
-            initial={{ opacity: 0, x: 100 * direction }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: -100 * direction }}
-            transition={{ duration: 0.6 }}
-          >
-            <TeamCard team={currentTeam} />
-          </motion.div>
+          {currentTeam && (
+            <motion.div
+              key={currentTeam.id}
+              initial={{ opacity: 0, x: 100 * direction }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -100 * direction }}
+              transition={{ duration: 0.6 }}
+            >
+              <TeamCard team={currentTeam} />
+            </motion.div>
+          )}
         </AnimatePresence>
       </main>
     </div>
