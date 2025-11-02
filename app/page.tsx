@@ -15,11 +15,11 @@ export default function LeaderboardPage() {
   const [direction, setDirection] = useState(1)
 
   useEffect(() => {
-    fetch("http://127.0.0.1:8000/get-teams/")
+    fetch("https://iotronix-repo-327801006985.europe-west1.run.app/get-teams/")
       .then((res) => res.json())
       .then((data) => setTeams(data.teams || []))
 
-    fetch("http://127.0.0.1:8000/get-participants/")
+    fetch("https://iotronix-repo-327801006985.europe-west1.run.app/get-participants/")
       .then((res) => res.json())
       .then((data) => setParticipants(data.participants || []))
   }, [])
