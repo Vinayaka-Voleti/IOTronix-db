@@ -37,14 +37,13 @@ export default function ParticipantsPage({ participants }: ParticipantsPageProps
               style={{ fontFamily: "Orbitron, sans-serif" }}
             >
 
-              Selected Participants
+              Congratulations!! Selected Participants
             </h2>
             <div className="h-1 w-full bg-gradient-to-r from-primary via-secondary to-primary rounded-full" />
-            <p className="text-center text-muted-foreground mt-3 text-base md:text-lg">
-              {/* Total: {participants.length} Participants */}
-              Total: 50 Participants
+            {/* <p className="text-center text-muted-foreground mt-3 text-base md:text-lg">
+              Total: Participants
 
-            </p>
+            </p> */}
           </motion.div>
 
           {/* Participants Grid */}
