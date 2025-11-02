@@ -62,7 +62,6 @@ export default function LeaderboardPage() {
     <div className="relative w-full h-screen overflow-hidden bg-background">
       <ParticleBackground />
 
-      {/* Navbar - hidden on all-teams-dashboard */}
       {showNavbar && (
         <header className="absolute top-0 left-0 right-0 z-10 flex items-center justify-between px-20 py-10">
           <div className="flex items-center gap-4">
@@ -112,13 +111,6 @@ export default function LeaderboardPage() {
       </main>
 
       <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 z-10">
-        {/* <p className="text-muted-foreground text-center text-sm">
-          {currentPageIndex === 0
-            ? "🎯 All Participants"
-            : currentPageIndex <= teams.length
-              ? `Team ${currentPageIndex} of ${teams.length}`
-              : "📊 All Teams Summary"}
-        </p> */}
       </div>
     </div>
   )
